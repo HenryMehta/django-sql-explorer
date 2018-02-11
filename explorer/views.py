@@ -160,7 +160,8 @@ class SchemaView(PermissionRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         connection = kwargs.get('connection')
         if connection not in connections:
-            raise Http404
+            #raise Http404
+            connection = app_settings.EXPLORER_DEFAULT_CONNECTION
         schema = schema_info(connection)
         if schema:
             return render_to_response('explorer/schema.html',
